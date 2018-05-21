@@ -1,4 +1,4 @@
-import { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLList } from "graphql";
+import { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLList, GraphQLInputObjectType, GraphQLNonNull } from "graphql";
 import { Author } from "./Author";
 import { fakeDatabase } from "../../FakeDatabase";
 
@@ -21,5 +21,14 @@ export const Post = GraphQLObjectType({
 				return fakeDatabase.getCommentsForPost(post.id);
 			}
 		}
-	});
+	})
+})
+
+export const PostInputType = new GraphQLInputObjectType({
+	name: 'PostInput',
+	fields: {
+		type: { type: new GraphQLNonNull(GraphQLString) },
+		type: { type: new GraphQLNonNull(GraphQLString) },
+		type: { type: new GraphQLNonNull(GraphQLString) }
+	}
 })
