@@ -1,4 +1,3 @@
-import { GraphQLNonNull, GraphQLInt } from 'graphql'
 import { fakeDatabase } from '../../FakeDatabase'
 import { Comment, CommentInputType } from '../types/Comment';
 
@@ -9,7 +8,7 @@ export default {
         args: { 
             comment: { type: CommentInputType}
          },
-        resolve: (parent, {comment}) => {
+        resolve: (root, {comment}) => {
             return fakeDatabase.addNewComment(comment)
         }
     }

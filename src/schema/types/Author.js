@@ -1,18 +1,20 @@
-import { GraphQLObjectType, GraphQLString, GraphQLList } from 'graphql'
+import { GraphQLObjectType, GraphQLString, GraphQLList, GraphQLNonNull } from 'graphql'
 import { Post } from './Post'
 import { fakeDatabase } from '../../FakeDatabase'
 
-export const Author = GraphQLObjectType({
+export const Author = new GraphQLObjectType({
 	name: "Author",
-	description: "All details about author",
+	description: "All details of an author on the website",
+
 	fields: () => ({
-		id: { type: GraphQLString },
+		id: { type: new GraphQLNonNull(GraphQLString) },
 		name: { type: GraphQLString },
 		email: { type: GraphQLString },
-		post: {
-			type: GraphQLList(Post),
-			resolve: (author) => {
-				return fakeDatabase.getPostsOfAuthor(author.id);
+
+		posts: {
+			type: new GraphQLList(Post),
+			resolve: (source) => {
+				return fakeDatabase.getPostsOfAuthor(source.id);
 			}
 		}
 	})

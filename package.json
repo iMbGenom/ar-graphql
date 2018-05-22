@@ -5,11 +5,13 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "babel src --out-dir dist/"
+    "build": "babel src --out-dir dist/ && node dist/index.js",
+    "serve": "babel src --out-dir dist/ && node dist/serve.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "express-graphql": "^0.6.12",
     "graphql": "^0.13.2"
   },
   "devDependencies": {
